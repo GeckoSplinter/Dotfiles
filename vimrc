@@ -38,6 +38,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'pearofducks/ansible-vim'
 
 call plug#end()
 
@@ -77,11 +78,11 @@ if (has("termguicolors"))
 endif
 colorscheme gruvbox      "Theme color selection
 set background=dark
+set t_Co=256
 
 " General config
 syntax on               " Coloration
 
-set updatetime=100      " Add for git gutter
 set fileformats=unix    " format des fichier en unix
 set number              " Line number
 set relativenumber
