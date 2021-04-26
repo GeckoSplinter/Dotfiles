@@ -1,24 +1,10 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""
-"   $$$$$$\ $$$$$$$$\ $$$$$$\ $$\   $$\ $$$$$$\
-"   $$  __$$\$$  _____$$  __$$\$$ | $$  $$  __$$\
-"   $$ /  \__$$ |     $$ /  \__$$ |$$  /$$ /  $$ |
-"   $$ |$$$$\$$$$$\   $$ |     $$$$$  / $$ |  $$ |
-"   $$ |\_$$ $$  __|  $$ |     $$  $$<  $$ |  $$ |
-"   $$ |  $$ $$ |     $$ |  $$\$$ |\$$\ $$ |  $$ |
-"   \$$$$$$  $$$$$$$$\\$$$$$$  $$ | \$$\ $$$$$$  |
-"    \______/\________|\______/\__|  \__|\______/
-"
-"                 Configuration Vim
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
 call plug#begin('~/.vim/plugged')
 
 " Display
-Plug 'jacoborus/tender.vim'
+"Plug 'jacoborus/tender.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 Plug 'vim-airline/vim-airline'
@@ -27,18 +13,24 @@ Plug 'ryanoasis/vim-devicons'
 
 " Utilities
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'mbbill/undotree'
-Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vuciv/vim-bujo'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 
 " Syntax
-Plug 'sheerun/vim-polyglot'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'pearofducks/ansible-vim'
+Plug 'tweekmonster/gofmt.vim'
+"Plug 'sheerun/vim-polyglot'
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -60,14 +52,16 @@ endif
 let g:airline_theme = 'gruvbox'
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 
-" indent guide
-let g:indent_guides_start_level=2
-
 " Golang plugin config
 let g:go_fmt_command = "goimports"
 
 " Gruvbox
 let g:gruvbox_contrast_dark = 'hard'
+
+lua require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
+lua require'lspconfig'.terraformls.setup{on_attach=require'completion'.on_attach}
+lua require'lspconfig'.yamlls.setup{on_attach=require'completion'.on_attach}
+
 
 " End of plugin configuration
 """"""""""""""
@@ -78,11 +72,11 @@ if (has("termguicolors"))
 endif
 colorscheme gruvbox      "Theme color selection
 set background=dark
-set t_Co=256
 
 " General config
 syntax on               " Coloration
 
+set updatetime=100      " Add for git gutter
 set fileformats=unix    " format des fichier en unix
 set number              " Line number
 set relativenumber
@@ -90,8 +84,8 @@ set ignorecase          " case unsensible search
 set autoread            " Auto reload file changed from outside
 set encoding=utf-8      " Force encoding
 set cursorline          " Highlight curent line
-set cc=120               " color colonne 120
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+set colorcolumn=120               " color colonne 120
+"highlight ColorColumn ctermbg=0 guibg=lightgrey
 "set tw=79               " set text width 79
 "set linebreak           " set auto return for 80
 set list
@@ -147,20 +141,31 @@ imap <left> <esc>
 imap <up> <esc>
 imap <down> <esc>
 
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 " Paste replace without modifying register
 vnoremap <leader>p "_dP
+
+" delete without modifying register
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
 
 " Sweet Sweet FuGITive
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :G<CR>
 
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 if executable('rg')
     let g:rg_derive_root='true'
 endif
 
-nnoremap <C-p> :GFiles<CR>
-nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
 
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 nnoremap <F8> :UndotreeToggle<cr>
