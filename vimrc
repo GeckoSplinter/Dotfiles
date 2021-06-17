@@ -18,7 +18,7 @@ filetype off                  " required
 call plug#begin('~/.vim/plugged')
 
 " Display
-Plug 'jacoborus/tender.vim'
+"Plug 'jacoborus/tender.vim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 Plug 'vim-airline/vim-airline'
@@ -31,14 +31,17 @@ Plug 'scrooloose/nerdtree'
 Plug 'mbbill/undotree'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vuciv/vim-bujo'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 " Syntax
-Plug 'sheerun/vim-polyglot'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'pearofducks/ansible-vim'
+"Plug 'sheerun/vim-polyglot'
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'pearofducks/ansible-vim'
 
 call plug#end()
 
@@ -82,7 +85,6 @@ set t_Co=256
 
 " General config
 syntax on               " Coloration
-
 set fileformats=unix    " format des fichier en unix
 set number              " Line number
 set relativenumber
@@ -90,8 +92,8 @@ set ignorecase          " case unsensible search
 set autoread            " Auto reload file changed from outside
 set encoding=utf-8      " Force encoding
 set cursorline          " Highlight curent line
-set cc=120               " color colonne 120
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+set colorcolumn=120     " color colonne 120
+"highlight ColorColumn ctermbg=0 guibg=lightgrey
 "set tw=79               " set text width 79
 "set linebreak           " set auto return for 80
 set list
@@ -101,15 +103,16 @@ set fillchars+=stl:\ ,stlnc:\
 set noswapfile
 set mouse=a             " activation of the mouse
 set cmdheight=2
-set updatetime=50
+set updatetime=40
 set undodir=~/.vim/undodir
 set undofile
 set shortmess+=c
+set scrolloff=8
+set signcolumn=yes
 
 " Indentation
-set tabstop=2           " The lengh of a tab (do not change)
+set tabstop=4           " The lengh of a tab (do not change)
 set softtabstop=4       " the number of space for tab
-set backspace=2         " set remove 2 carac with backspace
 set smarttab
 set expandtab           " space instead of tab
 set autoindent          " set autoindent

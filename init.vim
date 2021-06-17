@@ -1,7 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Display
 "Plug 'jacoborus/tender.vim'
@@ -27,9 +27,9 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
 " Syntax
-Plug 'tweekmonster/gofmt.vim'
+"Plug 'tweekmonster/gofmt.vim'
 "Plug 'sheerun/vim-polyglot'
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
@@ -42,6 +42,8 @@ set laststatus=2        " Required for powerline
 " Plugin configuration
 "
 """"""""""""""""""""""""""""""""""""""""""""
+
+lua require("geckosplinter")
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -57,10 +59,6 @@ let g:go_fmt_command = "goimports"
 
 " Gruvbox
 let g:gruvbox_contrast_dark = 'hard'
-
-lua require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
-lua require'lspconfig'.terraformls.setup{on_attach=require'completion'.on_attach}
-lua require'lspconfig'.yamlls.setup{on_attach=require'completion'.on_attach}
 
 
 " End of plugin configuration
@@ -85,7 +83,7 @@ set autoread            " Auto reload file changed from outside
 set encoding=utf-8      " Force encoding
 set cursorline          " Highlight curent line
 set colorcolumn=120               " color colonne 120
-"highlight ColorColumn ctermbg=0 guibg=lightgrey
+highlight ColorColumn ctermbg=0 guibg=grey
 "set tw=79               " set text width 79
 "set linebreak           " set auto return for 80
 set list
@@ -98,7 +96,7 @@ set cmdheight=2
 set updatetime=50
 set undodir=~/.vim/undodir
 set undofile
-set shortmess+=c
+set shortmess+=c        " Avoid showing message extra message when using completion
 
 " Indentation
 set tabstop=2           " The lengh of a tab (do not change)
@@ -166,9 +164,16 @@ if executable('rg')
     let g:rg_derive_root='true'
 endif
 
-
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 nnoremap <F8> :UndotreeToggle<cr>
+
+" nvim completion LSP
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
 
 " NERDTree configuration
 let NERDTreeIgnore = ['\.pyc$','\.o$','\.so$','\.a$','\.so$','\.o\.fpic$','\.d$']
@@ -181,14 +186,3 @@ nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" Go back to previous line from last edit
-if has("autocmd")
-    filetype plugin indent on
-    autocmd FileType text setlocal textwidth=79
-    " always jump to last edit position when opening a file
-    autocmd BufReadPost *
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \   exe "normal g`\"" |
-                \ endif
-endif
