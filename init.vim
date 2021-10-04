@@ -1,7 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Display
 "Plug 'jacoborus/tender.vim'
@@ -9,14 +9,17 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 
 " Utilities
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdtree'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'mbbill/undotree'
 "Plug 'nathanaelkane/vim-indent-guides'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'vuciv/vim-bujo'
 "Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "Plug 'junegunn/fzf.vim'
@@ -25,12 +28,15 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Syntax
-Plug 'tweekmonster/gofmt.vim'
+"Plug 'tweekmonster/gofmt.vim'
 "Plug 'sheerun/vim-polyglot'
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'hashivim/vim-terraform'
+Plug 'towolf/vim-helm'
 
 call plug#end()
 
@@ -58,13 +64,11 @@ let g:go_fmt_command = "goimports"
 " Gruvbox
 let g:gruvbox_contrast_dark = 'hard'
 
-lua require'lspconfig'.gopls.setup{on_attach=require'completion'.on_attach}
-lua require'lspconfig'.terraformls.setup{on_attach=require'completion'.on_attach}
-lua require'lspconfig'.yamlls.setup{on_attach=require'completion'.on_attach}
-
 
 " End of plugin configuration
 """"""""""""""
+
+lua require("geckosplinter")
 
 " Color scheme
 if (has("termguicolors"))
@@ -85,11 +89,11 @@ set autoread            " Auto reload file changed from outside
 set encoding=utf-8      " Force encoding
 set cursorline          " Highlight curent line
 set colorcolumn=120               " color colonne 120
-"highlight ColorColumn ctermbg=0 guibg=lightgrey
+highlight ColorColumn ctermbg=0 guibg=grey
 "set tw=79               " set text width 79
 "set linebreak           " set auto return for 80
 set list
-set listchars=tab:»-,trail:¬     " show $ for space on line end
+" set listchars=tab:»-,trail:¬
 set incsearch
 set fillchars+=stl:\ ,stlnc:\
 set noswapfile
@@ -98,7 +102,7 @@ set cmdheight=2
 set updatetime=50
 set undodir=~/.vim/undodir
 set undofile
-set shortmess+=c
+set shortmess+=c        " Avoid showing message extra message when using completion
 
 " Indentation
 set tabstop=2           " The lengh of a tab (do not change)
@@ -151,10 +155,15 @@ vnoremap <leader>p "_dP
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
+" Visual Search and replace
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
 " Sweet Sweet FuGITive
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
-nmap <leader>gs :G<CR>
+nmap <leader>gs :Git<CR>
+nmap <leader>gp :Git -c push.default=current push<CR>
+nmap <leader>gpf :Git -c push.default=current push -f<CR>
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -166,29 +175,30 @@ if executable('rg')
     let g:rg_derive_root='true'
 endif
 
-
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 nnoremap <F8> :UndotreeToggle<cr>
 
-" NERDTree configuration
-let NERDTreeIgnore = ['\.pyc$','\.o$','\.so$','\.a$','\.so$','\.o\.fpic$','\.d$']
-let NERDTreeQuitOnOpen = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-let NERDTreeAutoDeleteBuffer = 1
-nnoremap <Leader>f :NERDTreeToggle<Enter>
-nnoremap <silent> <Leader>v :NERDTreeFind<CR>
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" nvim completion LSP
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-" Go back to previous line from last edit
-if has("autocmd")
-    filetype plugin indent on
-    autocmd FileType text setlocal textwidth=79
-    " always jump to last edit position when opening a file
-    autocmd BufReadPost *
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \   exe "normal g`\"" |
-                \ endif
-endif
+" Set completeopt to have a better completion experience
+set completeopt=menuone,noinsert,noselect
+
+" Nvim tree
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+
+"" NERDTree configuration
+"let NERDTreeIgnore = ['\.pyc$','\.o$','\.so$','\.a$','\.so$','\.o\.fpic$','\.d$']
+"let NERDTreeQuitOnOpen = 1
+"let NERDTreeMinimalUI = 1
+"let NERDTreeDirArrows = 1
+"let NERDTreeAutoDeleteBuffer = 1
+"nnoremap <Leader>f :NERDTreeToggle<Enter>
+"nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
