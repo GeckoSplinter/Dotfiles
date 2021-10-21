@@ -90,6 +90,7 @@ set encoding=utf-8      " Force encoding
 set cursorline          " Highlight curent line
 set colorcolumn=120               " color colonne 120
 highlight ColorColumn ctermbg=0 guibg=grey
+hi Normal guibg=NONE ctermbg=NONE
 "set tw=79               " set text width 79
 "set linebreak           " set auto return for 80
 set list
