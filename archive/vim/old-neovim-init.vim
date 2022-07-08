@@ -12,6 +12,9 @@ Plug 'vim-airline/vim-airline-themes'
 "Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 
+" nvim-spectre
+" nvim-bqf
+
 " Utilities
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
@@ -32,8 +35,12 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Syntax
 "Plug 'tweekmonster/gofmt.vim'
-"Plug 'sheerun/vim-polyglot'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sheerun/vim-polyglot'
+"Plug 'ray-x/go.nvim'
+"Plug 'sebdah/vim-delve'
+"Plug 'puremourning/vimspector'
+"Plug 'mfussenegger/nvim-dap'
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'hashivim/vim-terraform'
 Plug 'towolf/vim-helm'
@@ -58,11 +65,11 @@ endif
 let g:airline_theme = 'gruvbox'
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 
-" Golang plugin config
-let g:go_fmt_command = "goimports"
-
 " Gruvbox
 let g:gruvbox_contrast_dark = 'hard'
+
+" Terraform
+let g:terraform_fmt_on_save = 1
 
 
 " End of plugin configuration
@@ -88,7 +95,9 @@ set ignorecase          " case unsensible search
 set autoread            " Auto reload file changed from outside
 set encoding=utf-8      " Force encoding
 set cursorline          " Highlight curent line
+"highlight iCursor guifg=white guibg=steelblue
 set colorcolumn=120               " color colonne 120
+
 highlight ColorColumn ctermbg=0 guibg=grey
 hi Normal guibg=NONE ctermbg=NONE
 "set tw=79               " set text width 79
@@ -123,12 +132,21 @@ let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
+" Indent lines
+highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine
+highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine
+highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine
+highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine
+highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine
+highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine
+
 " yaml fix ident trigger on :
 augroup yaml-filetype
     autocmd!
     autocmd FileType yaml setl indentkeys-=<:>
 augroup END
 
+highlight Comment cterm=italic gui=italic
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
@@ -186,11 +204,20 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
+let g:completion_enable_auto_popup = 0
+imap <tab> <Plug>(completion_smart_tab)
+imap <s-tab> <Plug>(completion_smart_s_tab)
 
 " Nvim tree
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
+
+" Golang
+"autocmd BufWritePre *.go :silent! lua require('go.format').gofmt()
+"lua require('go').setup()
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.go lua goimports(1000)
 
 "" NERDTree configuration
 "let NERDTreeIgnore = ['\.pyc$','\.o$','\.so$','\.a$','\.so$','\.o\.fpic$','\.d$']

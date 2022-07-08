@@ -3,16 +3,24 @@ Dotfiles
 
 # VIM
 
-vim8 and vimplug
+Vim user since 2011 from vi to vim to neovim
 
-## Display / Theme
+## Actual vim setup
 
+- neovim
+- full lua config
+- packer replaced vimplug
+
+## Old archive setup
+- vim and vimplug
+- neovim  0.5 lsp telescope and still vim script for config vimplug
+
+## Color scheme history
+
+- molokai
+- solarized (with light and dark switch)
 - 'jacoborus/tender.vim'
-- 'gruvbox-community/gruvbox'
-- 'sainnhe/gruvbox-material'
-- 'vim-airline/vim-airline'
-- 'vim-airline/vim-airline-themes'
-- 'ryanoasis/vim-devicons'
+- **Actual** 'gruvbox-community/gruvbox'
 
 ## Utilities
 
@@ -31,16 +39,9 @@ vim8 and vimplug
 
 # SHELL
 
-Stop zsh to fish + omf
-
-- [iterm2 config](https://github.com/tombell/tender-iterm2)
+Stop zsh to fish
 
 ## Fish config
 
 - [git alias](https://github.com/GeckoSplinter/plugin-git)
 - [kubectl](https://github.com/evanlucas/fish-kubectl-completions)
-
-### Themes
-
-- bobthefish
-- agnoster
