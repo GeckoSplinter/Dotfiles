@@ -18,6 +18,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 " Utilities
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'pwntester/octo.nvim'
 "Plug 'scrooloose/nerdtree'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'mbbill/undotree'
@@ -40,10 +41,11 @@ Plug 'sheerun/vim-polyglot'
 "Plug 'sebdah/vim-delve'
 "Plug 'puremourning/vimspector'
 "Plug 'mfussenegger/nvim-dap'
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'hashivim/vim-terraform'
 Plug 'towolf/vim-helm'
+"Plug 'Joakker/lua-json5', {'do': './install.sh'}
 
 call plug#end()
 
@@ -86,6 +88,7 @@ set background=dark
 
 " General config
 syntax on               " Coloration
+highlight Normal guibg=000000
 
 set updatetime=100      " Add for git gutter
 set fileformats=unix    " format des fichier en unix
@@ -183,6 +186,7 @@ nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :Git<CR>
 nmap <leader>gp :Git -c push.default=current push<CR>
 nmap <leader>gpf :Git -c push.default=current push -f<CR>
+nmap <leader>gupm :Git pull --rebase origin master<CR>
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>

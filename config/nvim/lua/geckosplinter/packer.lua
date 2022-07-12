@@ -69,4 +69,7 @@ return require('packer').startup(function()
           'nvim-lualine/lualine.nvim',
           requires = { 'kyazdani42/nvim-web-devicons', opt = true }
       }
+
+      -- Other stuff
+      use 'towolf/vim-helm'
   end)
