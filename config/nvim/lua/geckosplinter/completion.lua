@@ -128,6 +128,7 @@ lspconfig.gopls.setup {
 
 
 local lspkind = require('lspkind')
+vim.cmd [[ autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync() ]]
 
 
 -- Snippets
