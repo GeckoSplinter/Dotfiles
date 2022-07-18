@@ -27,8 +27,7 @@ return require('packer').startup(function()
       use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
       use {'kevinhwang91/nvim-bqf', ft = 'qf'}
       use {
-          'windwp/nvim-spectre',
-          requires = {
+          'windwp/nvim-spectre', requires = {
               { 'nvim-lua/plenary.nvim' }
           }
       }
@@ -72,4 +71,5 @@ return require('packer').startup(function()
 
       -- Other stuff
       use 'towolf/vim-helm'
+      use 'sebdah/vim-delve'
   end)
