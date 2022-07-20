@@ -52,8 +52,8 @@ require('spectre').setup{}
 
 -- Mappings
 
-nnoremap('<leader>g', require('spectre').open)
-vnoremap('<leader>g', function()
+nnoremap('<leader>s', require('spectre').open)
+vnoremap('<leader>s', function()
     require('spectre').open_visual({ select_word = true })
 end)
 
