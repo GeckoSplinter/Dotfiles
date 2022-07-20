@@ -2,13 +2,14 @@ return require('packer').startup(function()
       use 'wbthomason/packer.nvim'
 
       -- Git sections
-      use {
-            'TimUntersberger/neogit',
-            requires = {
-                  'nvim-lua/plenary.nvim',
-                  'sindrets/diffview.nvim'
-            }
-      }
+      use 'tpope/vim-fugitive'
+      --use {
+      --      'TimUntersberger/neogit',
+      --      requires = {
+      --            'nvim-lua/plenary.nvim',
+      --            'sindrets/diffview.nvim'
+      --      }
+      --}
       use 'lewis6991/gitsigns.nvim'
 
 

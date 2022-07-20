@@ -1,11 +1,17 @@
 -- Git related plugins and settings
-local neogit = require('neogit')
+--local neogit = require('neogit')
 local nnoremap = require('geckosplinter.keymap').nnoremap
 
-neogit.setup {}
-nnoremap("<leader>gs", function()
-    neogit.open({ })
-end);
+--neogit.setup {}
+--nnoremap("<leader>gs", function()
+--    neogit.open({ })
+--end);
+-- Fugitive
+nnoremap("<leader>gs",":Git<CR>")
+nnoremap("<leader>gp", ":Git -c push.default=current push<CR>")
+nnoremap("<leader>gpf", ":Git -c push.default=current push -f<CR>")
+nnoremap("<leader>gupm", ":Git pull --rebase origin master<CR>")
+
 nnoremap("<leader>ga", "<cmd>!git fetch --all<CR>");
 
 

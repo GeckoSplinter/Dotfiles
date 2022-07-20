@@ -77,5 +77,5 @@ end)
 
 vim.keymap.set('', '<leader>h', require('telescope.builtin').resume, keymapOptions)
 
-nnoremap('!', require('telescope.builtin').git_status)
-nnoremap('@', require('telescope.builtin').git_bcommits)
+nnoremap('<leader>!', require('telescope.builtin').git_status)
+nnoremap('<leader>@', require('telescope.builtin').git_bcommits)
