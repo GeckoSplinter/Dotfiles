@@ -6,13 +6,15 @@ local nnoremap = require('geckosplinter.keymap').nnoremap
 --nnoremap("<leader>gs", function()
 --    neogit.open({ })
 --end);
--- Fugitive
+-- Fugitive ang git mapping
 nnoremap("<leader>gs",":Git<CR>")
 nnoremap("<leader>gp", ":Git -c push.default=current push<CR>")
 nnoremap("<leader>gpf", ":Git -c push.default=current push -f<CR>")
-nnoremap("<leader>gupm", ":Git pull --rebase origin master<CR>")
+nnoremap("<leader>gu", ":Git pull --rebase origin master<CR>")
+nnoremap("<leader>gh", ":<cmd>!gh pr create -f <CR>")
+nnoremap("<leader>ga", "<cmd>!git fetch --all<CR>")
 
-nnoremap("<leader>ga", "<cmd>!git fetch --all<CR>");
+require('octo').setup()
 
 
 require('gitsigns').setup {

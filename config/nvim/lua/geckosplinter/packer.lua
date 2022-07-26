@@ -73,4 +73,5 @@ return require('packer').startup(function()
       -- Other stuff
       use 'towolf/vim-helm'
       use 'sebdah/vim-delve'
+      use 'fatih/vim-go'
   end)
