@@ -3,20 +3,13 @@ return require('packer').startup(function()
 
       -- Git sections
       use 'tpope/vim-fugitive'
-      --use {
-      --      'TimUntersberger/neogit',
-      --      requires = {
-      --            'nvim-lua/plenary.nvim',
-      --            'sindrets/diffview.nvim'
-      --      }
-      --}
       use 'lewis6991/gitsigns.nvim'
 
 
       -- Utilities sections
       use 'nvim-lua/popup.nvim'
       use {
-            'nvim-telescope/telescope.nvim',
+            'nvim-telescope/telescope.nvim', tag = '0.1.0',
             requires = {
                   'nvim-lua/plenary.nvim',
                   { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },

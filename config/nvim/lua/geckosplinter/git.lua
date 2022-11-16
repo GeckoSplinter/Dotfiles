@@ -14,9 +14,6 @@ nnoremap("<leader>gu", ":Git pull --rebase origin master<CR>")
 nnoremap("<leader>gh", ":<cmd>!gh pr create -f <CR>")
 nnoremap("<leader>ga", "<cmd>!git fetch --all<CR>")
 
-require('octo').setup()
-
-
 require('gitsigns').setup {
   signs = {
     add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},

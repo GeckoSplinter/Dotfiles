@@ -1,5 +1,5 @@
-require("geckosplinter.base")
 require("geckosplinter.packer")
+require("geckosplinter.base")
 require("geckosplinter.interface")
 require("geckosplinter.utilities")
 require("geckosplinter.completion")
