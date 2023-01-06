@@ -1,6 +1,6 @@
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
-vim.keymap.set("n", "<leader>gp", ":Git -c push.default=current push<CR>")
-vim.keymap.set("n", "<leader>gpf", ":Git -c push.default=current push -f<CR>")
+--vim.keymap.set("n", "<leader>gp", ":Git -c push.default=current push<CR>")
+--vim.keymap.set("n", "<leader>gpf", ":Git -c push.default=current push -f<CR>")
 vim.keymap.set("n", "<leader>gu", ":Git pull --rebase origin master<CR>")
 vim.keymap.set("n", "<leader>gh", ":<cmd>!gh pr create -f <CR>")
 vim.keymap.set("n", "<leader>ga", "<cmd>!git fetch --all<CR>")
