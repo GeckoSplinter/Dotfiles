@@ -63,6 +63,8 @@ return require('packer').startup(function(use)
 	  }
   }
 
+  use('hashivim/vim-terraform')
+
   --use("folke/zen-mode.nvim")
   --use("github/copilot.vim")
 
