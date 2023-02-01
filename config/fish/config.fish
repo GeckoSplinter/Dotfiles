@@ -17,12 +17,9 @@ set -x PATH $HOME/.krew/bin $PATH
 # Rust config
 set -x PATH "$HOME/.cargo/bin" $PATH
 
-# JSONNET
-set -x JSONNET_PATH "$HOME/jsonnet-libs/grafonnet-lib:$HOME/projects/flux/common/libsonnet"
-
 # GCLOUD
-set -g -x "CLOUDSDK_PYTHON" "/usr/local/opt/python@3.8/libexec/bin/python"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
+#set -g -x "CLOUDSDK_PYTHON" "/usr/local/opt/python@3.8/libexec/bin/python"
+#source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
 
 # Theme
 set -g theme_nerd_fonts yes
@@ -41,3 +38,10 @@ abbr -a glol "git log --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset
 abbr -a k "kubectl"
 abbr -a kp "kubectl get pods"
 abbr -a ka "kubectl get all,cm,secret,sa"
+
+
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+    eval (keychain --quiet --eval --agents ssh,gpg t.perronin.id_ed25519 67B539D168A141B3)
+    starship init fish | source
+end
