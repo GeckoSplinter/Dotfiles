@@ -28,8 +28,10 @@ return require('packer').startup(function(use)
   use('theprimeagen/harpoon')
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
+  use('tpope/vim-rhubarb')
   use('lewis6991/gitsigns.nvim')
   use('lukas-reineke/indent-blankline.nvim')
+  use('numToStr/Comment.nvim')
 
   use {
     'kyazdani42/nvim-tree.lua',
@@ -46,8 +48,15 @@ return require('packer').startup(function(use)
 	  requires = {
 		  -- LSP Support
 		  {'neovim/nvim-lspconfig'},
+          -- Automatically install LSPs to stdpath for neovim
 		  {'williamboman/mason.nvim'},
 		  {'williamboman/mason-lspconfig.nvim'},
+
+          -- Useful status updates for LSP
+          {'j-hui/fidget.nvim'},
+
+          -- Additional lua configuration, makes nvim stuff amazing
+          {'folke/neodev.nvim'},
 
 		  -- Autocompletion
 		  {'hrsh7th/nvim-cmp'},
