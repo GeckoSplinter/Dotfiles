@@ -1,0 +1,5 @@
+creation_rules:
+  - path_regex: .*\.secret
+    #pgp: 5FDE2F3D414F08CAA180004C978F92A3F13FB4D2
+    age: >-
+      age1gekefns4nyh2xrkwgll67yt232gl0gndkuq0xrvd8clsjt2gzeas2zryhg
