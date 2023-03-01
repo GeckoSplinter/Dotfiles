@@ -72,6 +72,10 @@ return require('packer').startup(function(use)
 	  }
   }
 
+  use('b0o/schemastore.nvim')
+
+  use('lambdalisue/suda.vim')
+
   --use("folke/zen-mode.nvim")
   --use("github/copilot.vim")
 
