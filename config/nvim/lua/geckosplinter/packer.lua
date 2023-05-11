@@ -89,5 +89,15 @@ return require('packer').startup(function(use)
     use('towolf/vim-helm')
     --use("folke/zen-mode.nvim")
     --use("github/copilot.vim")
+    use {
+        "zbirenbaum/copilot.lua",
+        requires = { "zbirenbaum/copilot-cmp"}
+    }
+    --use {
+    --    'zbirenbaum/copilot.lua',
+    --    cmd = "Copilot",
+    --    event = "InsertEnter",
+    --    config = LazyCopilot(),
+    --}
 
 end)

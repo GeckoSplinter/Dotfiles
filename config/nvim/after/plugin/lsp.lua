@@ -24,6 +24,20 @@ lsp.configure('lua_ls', {
 
 
 local cmp = require('cmp')
+cmp.setup({
+  sources = {
+    {name = 'copilot'},
+    {name = 'nvim_lsp'},
+  },
+  mapping = {
+    ['<CR>'] = cmp.mapping.confirm({
+      -- documentation says this is important.
+      -- I don't know why.
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = false,
+    })
+  }
+})
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
