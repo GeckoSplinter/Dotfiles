@@ -41,7 +41,11 @@ yabai -m rule --add app=Moniteur manage=off
 yabai -m rule --add title="Toggl Track" manage=off
 yabai -m rule --add app=Finder title=Copy manage=off
 yabai -m rule --add app="System Preferences" manage=off
-yabai -m rule --add app="1Password" manage=ofF
+yabai -m rule --add app="1Password" manage=off
+yabai -m rule --add app="Fusion 360" manage=off opacity=1.0
+yabai -m rule --add app="Autodesk Identity Manager" manage=off opacity=1.0
+yabai -m rule --add app="ADPClientService" manage=off opacity=1.0
+
 
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
