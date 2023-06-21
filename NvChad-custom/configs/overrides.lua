@@ -37,6 +37,13 @@ M.mason = {
     -- c/cpp stuff
     "clangd",
     "clang-format",
+
+    -- go stuff
+    "gopls",
+
+    -- ops tuff
+    "terraform-ls",
+    "yaml-language-server",
   },
 }
 

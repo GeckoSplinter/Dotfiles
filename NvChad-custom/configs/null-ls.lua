@@ -16,7 +16,17 @@ local sources = {
   b.formatting.stylua,
 
   -- cpp
-  b.formatting.clang_format,
+  -- b.formatting.clang_format,
+
+  -- golang
+  b.formatting.goimports,
+  b.formatting.gofmt,
+
+  -- terraform
+  b.formatting.terraform_fmt,
+
+  -- yaml
+  b.formatting.prettier.with { filetypes = { "yaml" } },
 }
 
 null_ls.setup {
