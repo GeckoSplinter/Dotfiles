@@ -40,6 +40,9 @@ abbr -a kp "kubectl get pods"
 abbr -a ka "kubectl get all,cm,secret,sa"
 
 
+# SSH alias
+alias s "kitty +kitten ssh"
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
     eval (keychain --quiet --eval --agents ssh,gpg t.perronin.id_ed25519 67B539D168A141B3)
