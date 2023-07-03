@@ -11,8 +11,7 @@ local plugins = {
       -- format & linting
       {
         "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-          require "custom.configs.null-ls"
+        config = function() require "custom.configs.null-ls"
         end,
       },
     },
