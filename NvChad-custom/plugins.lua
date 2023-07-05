@@ -166,9 +166,6 @@ local plugins = {
   },
   -- }}}
 
-  -- vim fugitive
-  { "tpope/vim-fugitive", lazy = false },
-
   -- Golang
   {
     "mfussenegger/nvim-dap",
