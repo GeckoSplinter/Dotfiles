@@ -13,7 +13,8 @@ M.disabled = {
 
 M.general = {
 	n = {
-		[";"] = { ":", "enter command mode", opts = { nowait = true } }, },
+		[";"] = { ":", "enter command mode", opts = { nowait = true } },
+	},
 	v = {
 		["J"] = { ":m '>+1<CR>gv=gv", "move highlighted line down" },
 		["K"] = { ":m '<-2<CR>gv=gv", "move highlighted line up" },
@@ -53,6 +54,12 @@ M.dap = {
 M.dap_go = {
 	plugin = true,
 	n = {
+		["<leader>dgs"] = {
+			function()
+				require("dap-go").continue()
+			end,
+			"Start or continue debug sessions",
+		},
 		["<leader>dgt"] = {
 			function()
 				require("dap-go").debug_test()
