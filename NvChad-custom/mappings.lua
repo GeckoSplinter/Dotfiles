@@ -14,11 +14,13 @@ M.disabled = {
 M.general = {
 	n = {
 		[";"] = { ":", "enter command mode", opts = { nowait = true } },
+		["<leader>d"] = { '"_d', "delete without yanking" },
 	},
 	v = {
 		["J"] = { ":m '>+1<CR>gv=gv", "move highlighted line down" },
 		["K"] = { ":m '<-2<CR>gv=gv", "move highlighted line up" },
 		["<C-r>"] = { '"hy:%s/<C-r>h//gc<left><left><left>', "replace in visual mode" },
+		["<leader>d"] = { '"_d', "delete without yanking" },
 	},
 }
 
