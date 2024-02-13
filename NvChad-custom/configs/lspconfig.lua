@@ -11,6 +11,7 @@ local servers = {
 	"clangd",
   "gopls",
   "terraformls",
+  "rnix",
 }
 
 for _, lsp in ipairs(servers) do
@@ -22,6 +23,24 @@ end
 
 --
 -- lspconfig.pyright.setup { blabla}
+
+lspconfig.yamlls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    yaml = {
+      format = {
+        enable = true,
+      },
+      validate = true,
+      hover = true,
+      completion = true,
+      schemaStore = {
+        enable = true,
+      },
+    },
+  },
+})
 
 lspconfig.gopls.setup({
   on_attach = on_attach,
