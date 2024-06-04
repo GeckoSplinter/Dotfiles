@@ -1,5 +1,12 @@
 local M = {}
 
+M.copilot = {
+  enabled = true,
+  keymap = {
+    recommended = true,
+  },
+}
+
 M.treesitter = {
   ensure_installed = {
     "vim",

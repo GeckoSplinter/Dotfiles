@@ -21,8 +21,19 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
---
 -- lspconfig.pyright.setup { blabla}
+
+lspconfig.helm_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    ['helm-ls'] = {
+      yamlls = {
+        path = "yaml-language-server",
+      }
+    }
+  }
+}
 
 lspconfig.yamlls.setup({
   on_attach = on_attach,
@@ -53,4 +64,10 @@ lspconfig.gopls.setup({
       staticcheck = true,
     },
   },
+})
+
+lspconfig.pyright.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  filetypes = {"python"},
 })

@@ -14,7 +14,6 @@ local sources = {
 
   -- Lua
   b.formatting.stylua,
-
   -- cpp
   -- b.formatting.clang_format,
 
@@ -27,6 +26,9 @@ local sources = {
 
   -- yaml
   b.formatting.prettier.with { filetypes = { "yaml" } },
+
+  -- python
+  b.formatting.black,
 }
 
 null_ls.setup {

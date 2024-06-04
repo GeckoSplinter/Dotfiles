@@ -194,7 +194,9 @@ local plugins = {
       vim.cmd [[silent! GoInstallDeps]]
     end,
   },
-
+  {
+    "towolf/vim-helm",
+  },
 }
 
 return plugins
