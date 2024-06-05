@@ -1,0 +1,10 @@
+[kubernetes]
+disabled = false
+
+[aws]
+disabled = true
+
+[gcloud]
+disabled = false
+#format   = 'on [$symbol$active(\($region\))]($style) '
+format   = 'on [$symbol$active]($style) '
