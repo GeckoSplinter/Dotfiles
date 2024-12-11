@@ -67,4 +67,4 @@ abbr -a ka "kubectl get all,cm,secret,sa"
 abbr -a s "kitten ssh"
 
 starship init fish | source
-zoxide init fish | source
+zoxide init --cmd cd fish | source
