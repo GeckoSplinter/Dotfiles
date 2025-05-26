@@ -41,9 +41,8 @@ config.font_rules = {
 config.font_size = 15
 
 config.enable_tab_bar = false
-
+config.scrollback_lines = 3500
 config.window_decorations = "RESIZE"
-
 config.window_background_opacity = 1
 
 -- and finally, return the configuration to wezterm
