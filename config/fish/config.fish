@@ -13,6 +13,7 @@ fish_add_path /opt/homebrew/bin
 fish_add_path $HOME/.composer/vendor/bin
 fish_add_path /opt/homebrew/opt/openvpn/sbin
 fish_add_path $HOME/.rd/bin
+fish_add_path $HOME/.local/bin
 
 # Golang config
 set -x GOPATH $HOME/go
