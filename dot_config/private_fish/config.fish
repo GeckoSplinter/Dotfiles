@@ -33,8 +33,6 @@ end
 # Rust config
 set -x PATH "$HOME/.cargo/bin" $PATH
 
-# GCLOUD
-source "$(brew --prefix)/share/google-cloud-sdk/path.fish.inc"
 
 # SOPS
 set -x SOPS_AGE_KEY_FILE "$HOME/.config/sops/age/keys.txt"
@@ -49,7 +47,7 @@ set -g theme_display_k8s_namespace yes
 
 # Work stuff
 # # TODO migrate to omf plugin
-source $HOME/.config/fish/work.fish
+# source $HOME/.config/fish/work.fish
 source $HOME/.config/fish/helper.fish
 
 # Defaut browser

@@ -2,9 +2,8 @@
 
 # Work config
 [user]
-	email = thomas.perronin@blablacar.com
+	email = gecko.splinter@gmail.com
 	name = Thomas Perronin
-	signingkey = 67B539D168A141B3
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/
